@@ -19,16 +19,12 @@
                     {{#if logged_in}}
                     <a class="nav-item nav-link active" href="/logout">Logout</a>
                     {{else}}
+
                     <a class="nav-item nav-link active" href="/login">Login</a>
-                    {{/if}}
                   </div>
                 </div>
-                <div class="row">
-                    {{#if #dashboard}}
-                    <h2>The Tech Blog</h2>
-                    {{else}}
-                    <h2>Dashboard</h2>
-                    {{/if}}
+                <div>
+                    <h2 class="row">The Tech Blog</h2>
                 </div>
             </nav>
         </header>

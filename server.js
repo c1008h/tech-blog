@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-  secret: 'Super secret secret',
+  secret: 'boxybox',
   cookie: {},
   resave: false,
   saveUninitialized: true,
@@ -26,10 +26,11 @@ const sess = {
 
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
+// Set up Handlebars
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,5 +38,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log('Server is running'));
 });
