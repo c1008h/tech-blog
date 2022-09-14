@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection')
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const blogData = await Blog.findAll({
@@ -12,11 +13,11 @@ router.get('/', async (req, res) => {
           attributes: ['name'],
         },
         {
-            model: Comment,
-            include:{
-                model: User,
-                attributes: ['name'],
-            }
+          model: Comment,
+          include:{
+              model: User,
+              attributes: ['name'],
+          }
         }
       ],
     });
@@ -79,7 +80,7 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/dashboard');
     return;
   }
 

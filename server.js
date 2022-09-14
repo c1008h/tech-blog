@@ -16,7 +16,7 @@ const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: 'boxybox',
-  cookie: {},
+  cookie: {maxAge: 60000},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -34,9 +34,11 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
+
 
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Server is running'));
+  app.listen(PORT, () => console.log('Now listening'));
 });

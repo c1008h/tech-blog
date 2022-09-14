@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>MVC Tech Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="flex-column justify-space-around col-12">
-        <header class="display-flex justify-space-between align-center col-12 p-2">
-           
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                  <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home</a>
-                    <a class="nav-item nav-link active" href="#">Dashboard</a>
-                    {{#if logged_in}}
-                    <a class="nav-item nav-link active" href="/logout">Logout</a>
-                    {{else}}
-                    <a class="nav-item nav-link active" href="/login">Login</a>
-                    {{/if}}
-                  </div>
-                </div>
-                <div class="row">
-                    {{#if #dashboard}}
-                    <h2>The Tech Blog</h2>
-                    {{else}}
-                    <h2>Dashboard</h2>
-                    {{/if}}
-                </div>
-            </nav>
-        </header>
-        <main class="container container-fluid mt-5">
-            {{{body}}}
-        </main>
-        <footer>
-            {{#if logged_in}}
-            <script src="/js/logout.js"></script>
-            {{/if}}
-        </footer>
-    </div>
+    <header class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div>
+                      <div class="navbar-nav">
+                        <a href="/">Home</a>
+                        <a href="/dashboard">Dashboard</a>
+                      
+                        <a href="/">Logout</a>
+                        
+                        <a href="/login">Login</a>
+                        
+                      </div>
+                    </div>
+                  </nav>
+            </div>
+            <div class="row">
+                <h2>Tech Blog</h2>
+            </div>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    {{#if loggedIn}}
+    <script src="/js/login.js"></script>
+    {{/if}}
 </body>
 </html>
