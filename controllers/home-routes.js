@@ -107,7 +107,6 @@ router.get('/homepage', withAuth, async (req, res) => {
     // returning an instant of a blog
     // const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
     // console.log(blogs)
-    // Pass serialized data and session flag into template
     res.render('homepage', { 
       blogData, 
       logged_in: req.session.logged_in 
@@ -116,7 +115,6 @@ router.get('/homepage', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 } )
-
 
 module.exports = router;
 

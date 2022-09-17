@@ -19,7 +19,6 @@ router.get("/", withAuth, (req, res) => {
       console.log('this is console logging blog:')
       console.log(blog)
       res.render("dashboard", {
-        // layout: "dashboard",
         blog
       });
     })
@@ -31,7 +30,6 @@ router.get("/", withAuth, (req, res) => {
 
   router.get("/new", withAuth, (req, res) => {
     res.render("new", {
-      layout: "dashboard"
     });
   });
   
