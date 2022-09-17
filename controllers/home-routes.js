@@ -8,9 +8,29 @@ router.get('/', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const blogData = await Blog.findAll({
-      
+      // include:[
+      //   {
+      //     model: User,
+      //     attribites: ['username']
+      //   }
+      // ]
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'description','date_created','user_id'],
+          include:{
+              model: User,
+              attributes: ['username'],
+          }
+        }
+      ],
     });
-    console.log(blogData)
+    console.log('are you listening here???')
+    console.log(blogData[0])
     // console.log(blogData.dataValues.user)
     // console.log('blogdata.blog.datavalues.user:')
     //console.log(blogData.blog.dataValues.user)
@@ -110,7 +130,8 @@ router.get('/homepage', withAuth, async (req, res) => {
         }
       ],
     });
-    //console.log(blogData[0].dataValues)
+    console.log('blogData.dataValues')
+    console.log(blogData[0].dataValues)
 
     // Serialize data so the template can read it
     // returning an instant of a blog
