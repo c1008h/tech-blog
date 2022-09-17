@@ -28,18 +28,18 @@ router.get('/blog', async (req, res) => {
   }
 })
 
-// router.post('/blog', withAuth, async (req, res) => {
-//   try {
-//     const newBlog = await Blog.create({
-//       ...req.body,
-//       id: req.session.id,
-//     });
+router.post('/blog', withAuth, async (req, res) => {
+  try {
+    const newBlog = await Blog.create({
+      ...req.body,
+      id: req.session.id,
+    });
 
-//     res.status(200).json(newBlog);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+    res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 router.put('/:id', withAuth, async (req, res) => {
   try {
