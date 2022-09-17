@@ -8,26 +8,22 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header class="container-fluid">
-            <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div>
-                      <div class="navbar-nav">
-                        <a href="/">Home</a>
-                        <a href="/dashboard">Dashboard</a>
-                      
-                        <a href="/">Logout</a>
-                        
-                        <a href="/login">Login</a>
-                        
-                      </div>
-                    </div>
-                  </nav>
-            </div>
-            <div class="row">
-                <h2>Tech Blog</h2>
-            </div>
-    </header>
+    <nav class="navbar">
+    <ul>
+      <li class="li-inline nav-item"><a href="/">Home</a></li>
+      <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
+      <!-- Conditionally render login link with UNLESS-->
+      {{#unless loggedIn}}
+      <li class="li-inline nav-item"><a href="/login">Login</a></li>
+      {{/unless}}
+      <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1 class="app-title"><a href="/">The Tech Blog</a></h1>
+  </header>
+  
     <main>
         {{{body}}}
     </main>

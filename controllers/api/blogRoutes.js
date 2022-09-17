@@ -1,19 +1,45 @@
 const router = require('express').Router();
-const { Blog } = require('../../models');
+const { Blog, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.get('/blog', async (req, res) => {
   try {
-    const newBlog = await Blog.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-
-    res.status(200).json(newBlog);
-  } catch (err) {
-    res.status(400).json(err);
+    //const allBlog = 
+    await Blog.findAll({
+      // include: [
+      //   {
+      //     model: User,
+      //     attributes: ['username']
+      //   },
+      //   {
+      //     model: Comment,
+      //     attributes: ['id', 'description','date_created','user_id'],
+      //     include: [
+      //       {
+      //         model: User,
+      //         attributes: ['username'],
+      //       }
+      //     ]
+      //   }
+      // ]
+    })
+  } catch(err) {
+    res.status(500).json(err)
   }
-});
+})
+
+// router.post('/blog', withAuth, async (req, res) => {
+//   try {
+//     const newBlog = await Blog.create({
+//       ...req.body,
+//       id: req.session.id,
+//     });
+
+//     res.status(200).json(newBlog);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 router.put('/:id', withAuth, async (req, res) => {
   try {

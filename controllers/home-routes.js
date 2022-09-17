@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { render } = require('express/lib/response');
 const sequelize = require('../config/connection')
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
@@ -10,24 +11,35 @@ router.get('/', withAuth, async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
+        // {
+        //   model: Blog,
+        //   attributes: ['id', 'title','description','date_created','user_id'],
+        //     includes:{
+        //       model: Comment,
+        //       attributes: ['description', 'date_created', 'user_id', 'blog_id'],
+        //     }
+        // },
         {
           model: Comment,
+          attributes: ['id', 'description','date_created','user_id'],
           include:{
               model: User,
-              attributes: ['name'],
+              attributes: ['username'],
           }
         }
       ],
     });
+    console.log(blogData[0].dataValues)
 
     // Serialize data so the template can read it
-    const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
-
+    // returning an instant of a blog
+    // const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
+    // console.log(blogs)
     // Pass serialized data and session flag into template
     res.render('homepage', { 
-        blogs, 
+      blogData, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -37,13 +49,17 @@ router.get('/', withAuth, async (req, res) => {
 // Specific posted blog
 router.get('/blogs/:id', async (req, res) => {
   try {
-    const blogData = await blogs.findByPk(req.params.id, {
+    const blogData = await Blog.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
-      ],
+        {
+          model: Comment,
+          attributes: ['description','date_created', 'user_id']
+        }
+      ]
     });
 
     const blogs = blogData.get({ plain: true });
@@ -51,26 +67,6 @@ router.get('/blogs/:id', async (req, res) => {
     res.render('blogs', {
       blogs,
       logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Blog }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true
     });
   } catch (err) {
     res.status(500).json(err);
@@ -87,5 +83,63 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/signup', (req, res) => {
+  // const userData = await User.findByPk(req.session.id, {
+  //   attributes: { exclude: ['password'] },
+  //   include: [{ model: Blog }],
+  // });
+
+  // if(!userData) {
+  //   res.redirect('/dashboard')
+  //   return;
+  // } else {
+  //   console.log('This username is taken.')
+  // }
+
+  res.render('signup')
+})
+
+router.get('/homepage', withAuth, async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const blogData = await Blog.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        // {
+        //   model: Blog,
+        //   attributes: ['id', 'title','description','date_created','user_id'],
+        //     includes:{
+        //       model: Comment,
+        //       attributes: ['description', 'date_created', 'user_id', 'blog_id'],
+        //     }
+        // },
+        {
+          model: Comment,
+          attributes: ['id', 'description','date_created','user_id'],
+          include:{
+              model: User,
+              attributes: ['username'],
+          }
+        }
+      ],
+    });
+    console.log(blogData[0].dataValues)
+
+    // Serialize data so the template can read it
+    // returning an instant of a blog
+    // const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
+    // console.log(blogs)
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      blogData, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+} )
 module.exports = router;
 
