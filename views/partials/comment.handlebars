@@ -1,15 +1,28 @@
 <div class="comments">
-  {{#each this}}
+  <div>
     <div class="card">
-        <h3 class="card-header"></h3>
-        <section class="comment card-body">
-            <div class="text">
-                {{comment_text}}
-            </div>
-            <div class="meta">
-                {{user.username}}, {{format_date created_at}}
-            </div>
-        </section>
+      <div class="card-header row col-12">
+          <h2 class="col-6">{{dataValues.title}}</h2>
+          <h2 class="col-6">posted by {{dataValues.username}} on </h2>
+      </div>
+      <div class="card-body">
+          <p class="card-text">{{dataValues.description}}</p>
+      </div>
     </div>
-  {{/each}}
+  </div>
+  <div>
+    {{#each this}}
+      <div class="card">
+          <h3 class="card-header"></h3>
+          <section class="comment card-body">
+              <div class="text">
+                  {{comment_text}}
+              </div>
+              <div class="meta">
+                  {{user.username}}, {{format_date created_at}}
+              </div>
+          </section>
+        </div>
+      {{/each}}
+  </div>
 </div>

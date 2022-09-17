@@ -8,30 +8,13 @@ router.get('/', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const blogData = await Blog.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-        // {
-        //   model: Blog,
-        //   attributes: ['id', 'title','description','date_created','user_id'],
-        //     includes:{
-        //       model: Comment,
-        //       attributes: ['description', 'date_created', 'user_id', 'blog_id'],
-        //     }
-        // },
-        {
-          model: Comment,
-          attributes: ['id', 'description','date_created','user_id'],
-          include:{
-              model: User,
-              attributes: ['username'],
-          }
-        }
-      ],
+      
     });
-    console.log(blogData[0].dataValues)
+    console.log(blogData)
+    // console.log(blogData.dataValues.user)
+    // console.log('blogdata.blog.datavalues.user:')
+    //console.log(blogData.blog.dataValues.user)
+    //console.log(blogData[0].dataValues)
 
     // Serialize data so the template can read it
     // returning an instant of a blog
@@ -46,15 +29,15 @@ router.get('/', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // Specific posted blog
-router.get('/blogs/:id', async (req, res) => {
+router.get('/comment/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
+      where: {
+        id: req.session.id
+      },
       include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
         {
           model: Comment,
           attributes: ['description','date_created', 'user_id']
@@ -64,12 +47,12 @@ router.get('/blogs/:id', async (req, res) => {
 
     const blogs = blogData.get({ plain: true });
 
-    res.render('blogs', {
+    res.render('comment', {
       blogs,
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message: "Blog not found"});
   }
 });
 
@@ -108,14 +91,6 @@ router.get('/homepage', withAuth, async (req, res) => {
           model: User,
           attributes: ['username'],
         },
-        // {
-        //   model: Blog,
-        //   attributes: ['id', 'title','description','date_created','user_id'],
-        //     includes:{
-        //       model: Comment,
-        //       attributes: ['description', 'date_created', 'user_id', 'blog_id'],
-        //     }
-        // },
         {
           model: Comment,
           attributes: ['id', 'description','date_created','user_id'],
@@ -126,7 +101,7 @@ router.get('/homepage', withAuth, async (req, res) => {
         }
       ],
     });
-    console.log(blogData[0].dataValues)
+    //console.log(blogData[0].dataValues)
 
     // Serialize data so the template can read it
     // returning an instant of a blog
@@ -141,5 +116,7 @@ router.get('/homepage', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 } )
+
+
 module.exports = router;
 

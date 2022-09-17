@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header row col-12">
-        <h2 class="col-6">{{dataValues.title}}</h2>
-        <h2 class="col-6">posted by {{dataValues.username}} on </h2>
+        <h2 class="col-6"><a href="/comment/{{dataValues.id}}">{{dataValues.title}}</a></h2>
+        <p class="col-6">posted by {{dataValues.username}} on </p>
     </div>
     <div class="card-body">
         <p class="card-text">{{dataValues.description}}</p>

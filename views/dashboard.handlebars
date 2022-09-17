@@ -1,15 +1,15 @@
 <section>
   <div>
     <h2>Your Posts</h2>
-      {{#each userData as |mypost|}}
+      {{#each blog as |mypost|}}
         {{> mypost}}
       {{/each}}
   </div>
-  <button href="/new">Add Post</button>
-
 </section>
 
 
-<button type="submit" class="btn"><a class="link" href="/createpost">+ New Post</a></button>
+<footer class="footer flex-row justify-center">
+    <a href='/dashboard/new'>➕ New Post</a>
+</footer>
 
 <script src="/js/create-post.js"></script>
