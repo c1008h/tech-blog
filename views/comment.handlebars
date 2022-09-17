@@ -1,0 +1,29 @@
+<div class="comments">
+  <div>
+    <div class="card">
+      <div class="card-header row col-12">
+          <h2 class="col-6">{{blogData.dataValues.title}}</h2>
+          <h2 class="col-6">posted by {{user.username}} on {{dataValues.date_created}}</h2>
+      </div>
+      <div class="card-body">
+          <p class="card-text">{{dataValues.description}}</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    {{#each this}}
+      <div class="card">
+        <h3 class="card-header"></h3>
+        <section class="comment card-body">
+            <div class="text">
+                {{description}}
+            </div>
+            <div class="meta">
+                {{user.username}}, {{comments.date_created}}
+            </div>
+        </section>
+      </div>
+      {{/each}}
+  </div>
+</div>
+<script src="./js/comment.js"></script>

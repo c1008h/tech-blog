@@ -35,17 +35,26 @@ router.get('/comment/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       where: {
-        id: req.session.id
+        id: req.session.id,
+        user_id: req.session.user_id
       },
       include: [
         {
           model: Comment,
           attributes: ['description','date_created', 'user_id']
+        },
+        {
+          model: User,
+          attributes: ['username']
         }
+        
       ]
+      
     });
 
     const blogs = blogData.get({ plain: true });
+    console.log('This is for getting one comment')
+    console.log(blogs)
 
     res.render('comment', {
       blogs,

@@ -24,4 +24,4 @@ async function newFormHandler(event) {
     }
   };
   
-addBtn.addEventListener('submit', newFormHandler);
+addBtn.addEventListener('click', newFormHandler);
