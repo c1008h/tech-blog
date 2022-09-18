@@ -24,6 +24,7 @@ This NodeJS program allows users to quickly generate a professional README markd
 
 ## Instructions
 
+Deployed link: `https://chris-tech-blog-97.herokuapp.com/`
 
 ### Installation
 Use this command line to clone this repo before running the program:
@@ -31,13 +32,24 @@ Use this command line to clone this repo before running the program:
 >`git clone git@github.com:c1008h/tech-blog.git`
 
 Open the repo in VSC then open the terminal to that file. Once in the terminal, run `npm init`. Once initualize is finished, run `npm i`. This should install all packages and dependencies that are needed for this app.
-### Usage
-Type `node index.js` into the terminal to run this app. Once the app has started, user will be prompted with a handful of questions to answer. When the questionare is completely filled out, the README.md file will be updated with the user's input. From there, users can copy and paste into whatever README.md file they desire. 
 
-Fun fact, the samplereadme.md was created using this generator. 
+Open MySql shell in the terminal by running `mysql -u root -p`. Enter password when prompted. 
+
+Once logged into shell, run `SOURCE db/schema.sql;` then `exit`. To use the database. Run `npm run seed` to run the seeds then `npm start` to run the app locally on `http://localhost:3001/`. 
+
+### Usage
+Open `http://localhost:3001/` in the browser to run the tech blog. There is seeded files so there will be three users. 
+
+To login use one of the usernames available (Chris, Bob, Susan) with the password of `password`. 
+
+Once logged in, users can view all post in the homepage, or personal post in the dashboard. 
+
+The dashboard will allow users to add post. 
+
+The homepage will allow users to view comments and leave comments on other people's post. 
 
 ## Contribution
-Feel free to fork my repo and use it as your README generator. 
+Feel free to fork this repo and interact on the tech-blog.
 
 ## License
 <details>
