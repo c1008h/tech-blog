@@ -4,9 +4,10 @@ This NodeJS program allows users to quickly generate a professional README markd
 ### Created with:
 - <a href='https://javascript.info/'>JavaScript</a>
 - <a href='https://nodejs.org/en/'>Node JS</a>
-- <a href='https://www.npmjs.com/package/inquirer'>Inquirer</a>
+- <a href='https://www.npmjs.com/package/dotenv'>dotenv</a>
 - <a href='https://handlebarsjs.com/guide/#what-is-handlebars'>Handlebars</a>
 - <a href='https://sequelize.org/docs/v6/'>Seqeulize</a>
+- - <a href='https://www.npmjs.com/package/mysql2#installation'>MySql2</a>
 
 
 ## Table of Contents (Optional)
@@ -24,7 +25,7 @@ This NodeJS program allows users to quickly generate a professional README markd
 
 ## Instructions
 
-Deployed link: `https://chris-tech-blog-97.herokuapp.com/`
+Deployed link: <a href='https://chris-tech-blog-97.herokuapp.com/'>`https://chris-tech-blog-97.herokuapp.com/`</a
 
 ### Installation
 Use this command line to clone this repo before running the program:
