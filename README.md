@@ -26,7 +26,7 @@ This application is a Tech Blog that allow users to create blog, edit blog, and 
 
 ## Instructions
 
-Deployed link: <a href='https://chris-tech-blog-97.herokuapp.com/'>`https://chris-tech-blog-97.herokuapp.com/`</a
+Deployed link: <a href='https://chris-tech-blog-97.herokuapp.com/'>`https://chris-tech-blog-97.herokuapp.com/`</a>
 
 ### Installation
 Use this command line to clone this repo before running the program:
