@@ -1,13 +1,14 @@
 # Tech Blog
 ## Description
-This NodeJS program allows users to quickly generate a professional README markdown file based on the user's input.
+This application is a Tech Blog that allow users to create blog, edit blog, and view other peoples' blogs.
+
 ### Created with:
 - <a href='https://javascript.info/'>JavaScript</a>
 - <a href='https://nodejs.org/en/'>Node JS</a>
 - <a href='https://www.npmjs.com/package/dotenv'>dotenv</a>
 - <a href='https://handlebarsjs.com/guide/#what-is-handlebars'>Handlebars</a>
 - <a href='https://sequelize.org/docs/v6/'>Seqeulize</a>
-- - <a href='https://www.npmjs.com/package/mysql2#installation'>MySql2</a>
+- <a href='https://www.npmjs.com/package/mysql2#installation'>MySql2</a>
 
 
 ## Table of Contents (Optional)
