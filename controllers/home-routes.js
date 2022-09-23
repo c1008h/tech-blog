@@ -96,18 +96,11 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  // const userData = await User.findByPk(req.session.id, {
-  //   attributes: { exclude: ['password'] },
-  //   include: [{ model: Blog }],
-  // });
-
-  // if(!userData) {
-  //   res.redirect('/dashboard')
-  //   return;
-  // } else {
-  //   console.log('This username is taken.')
-  // }
-
+  if(req.session.logged_in) {
+    res.redirect('/dashboard');
+    return;
+  }
+  
   res.render('signup')
 })
 
