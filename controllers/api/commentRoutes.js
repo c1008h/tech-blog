@@ -1,7 +1,24 @@
 const router = require('express').Router();
 const Comment = require('../../models');
 
-// route to create/add a dish
+router.get('/', async (req, res) => {
+ try {
+   const allComment = await Comment.findAll({
+     include: [
+       {
+         model: User,
+         attributes: ['username']
+       }
+     ]
+   })
+   console.log(allComment)
+ } catch(err) {
+  res.status(500).json(err)
+  console.log("Can't show all comments")
+ }
+});
+
+// route to create/add a comment
 router.post('/', async (req, res) => {
   try {
     const commentData = await Comment.create({
@@ -10,6 +27,8 @@ router.post('/', async (req, res) => {
       user_id: req.body.user_id,
       blog_id: req.body.blog_id,
     });
+
+    console.log(commentData)
     res.status(200).json(commentData);
   } catch (err) {
     res.status(400).json(err);

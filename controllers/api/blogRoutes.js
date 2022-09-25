@@ -4,25 +4,25 @@ const withAuth = require('../../utils/auth');
 
 router.get('/blog', async (req, res) => {
   try {
-    //const allBlog = 
-    await Blog.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //     attributes: ['username']
-      //   },
-      //   {
-      //     model: Comment,
-      //     attributes: ['id', 'description','date_created','user_id'],
-      //     include: [
-      //       {
-      //         model: User,
-      //         attributes: ['username'],
-      //       }
-      //     ]
-      //   }
-      // ]
+    const allBlog = await Blog.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username']
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'description','date_created','user_id'],
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            }
+          ]
+        }
+      ]
     })
+    console.log(allBlog)
   } catch(err) {
     res.status(500).json(err)
   }
