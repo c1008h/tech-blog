@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 });
 
 // Specific posted blog
-router.get('/blog/:id', async (req, res) => {
+router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       // where: {
@@ -70,31 +70,11 @@ router.get('/blog/:id', async (req, res) => {
 
 router.get('/homepage', withAuth, async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    // const blogData = await User.findAll({
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['username'],
-    //     },
-    //     {
-    //       model: Comment,
-    //       attributes: ['id', 'description','date_created','user_id'],
-    //       include:{
-    //           model: User,
-    //           attributes: ['username'],
-    //       }
-    //     }
-    //   ],
-    // });
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blog }],
     });
     const user = userData.get({ plain: true });
-
-    // console.log('blogData.dataValues')
-    // console.log(blogData[0].dataValues)
 
     // Serialize data so the template can read it
     // returning an instant of a blog
