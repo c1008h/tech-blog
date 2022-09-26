@@ -1,8 +1,34 @@
 const router = require('express').Router();
 const Comment = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// route to create/add a dish
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
+ try {
+   const allComment = await Comment.findAll({
+     include: [
+       {
+         model: User,
+         attributes: ['username']
+       }
+     ]
+   })
+   const comments = allComment.map((comment) => comment.get({ plain: true }));
+
+   console.log("allComment:" + allComment)
+   console.log("comment:" + comments)
+
+   res.render('comment', {
+     comments,
+     logged_in: req.session.logged_in
+   })
+ } catch(err) {
+  res.status(500).json(err)
+  console.log("Can't show all comments")
+ }
+});
+
+// route to create/add a comment
+router.post('/comment', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create({
       description: req.body.description,
@@ -10,6 +36,8 @@ router.post('/', async (req, res) => {
       user_id: req.body.user_id,
       blog_id: req.body.blog_id,
     });
+
+    console.log(commentData)
     res.status(200).json(commentData);
   } catch (err) {
     res.status(400).json(err);
@@ -18,7 +46,7 @@ router.post('/', async (req, res) => {
 
 // According to MVC, what is the role of this action method?
 // This action method is the Controller. It accepts input and sends data to the Model and the View.
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   // Where is this action method sending the data from the body of the fetch request? Why?
   // It is sending the data to the Model so that one dish can be updated with new data in the database.
   try {

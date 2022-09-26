@@ -1,6 +1,21 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+router.post('/signup', async (req, res) => {
+  try {
+    const userData = await User.create(req.body);
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.status(200).json(userData);
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}); 
+
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });
@@ -12,7 +27,8 @@ router.post('/login', async (req, res) => {
     }
     console.log(req.body)
     console.log("req.body")
-    const validPassword = userData.checkPassword(req.body.password);
+
+    const validPassword = await userData.checkPassword(req.body.password);
     console.log(validPassword)
 
     if (!validPassword) {
@@ -34,28 +50,28 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/signup', async (req, res) => {
- try {
-    const userData = await User.create({
-    username: req.body.username,
-    password: req.body.password
-    })
+// router.post('/signup', async (req, res) => {
+//  try {
+//     const userData = await User.create({
+//     username: req.body.username,
+//     password: req.body.password
+//     })
 
-    console.log(userData)
+//     console.log(userData)
 
-    if(userData) {
-      req.session.save(() => {
-        req.session.userId = userData.id;
-        req.session.username = userData.username;
-        req.session.logged_in = true;
+//     if(userData) {
+//       req.session.save(() => {
+//         req.session.userId = userData.id;
+//         req.session.username = userData.username;
+//         req.session.logged_in = true;
   
-        res.json(userData);
-    })}
-  } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
-  } 
-})
+//         res.json(userData);
+//     })}
+//   } catch (err) {
+//     console.log(err)
+//     res.status(500).json(err)
+//   } 
+// })
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
