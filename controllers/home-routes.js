@@ -6,29 +6,22 @@ router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const blogData = await Blog.findAll({
-      // include:[
-      //   {
+      include: [User]
+      // model: Comment,
+      // attributes: ['id', 'description', 'blog_id', 'user_id', 'date_created'],
+      // include: {
       //     model: User,
-      //     attribites: ['username']
-      //   }
-      // ]
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-        {
-          model: Comment,
-          attributes: ['id', 'description','date_created','user_id'],
-          include:{
-              model: User,
-              attributes: ['username'],
-          }
-        }
-      ],
+      //     attributes: ['username']
+      // }
+    
     });
+    // const blog = blogData.map((blog) => blog.get({ plain: true }));
+
     console.log('are you listening here???')
-    console.log(blogData[0])
+    console.log(blogData)
+
+    // const blog = blogData.map(blog => blog.get({ plain: true }));
+    // console.log(blogData.blog.dataValues.user)
     // console.log(blogData.dataValues.user)
     //console.log(blogData[0].dataValues)   
     // Pass serialized data and session flag into template
@@ -56,13 +49,14 @@ router.get('/blog/:id', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['description','date_created', 'user_id']
+          attributes: ['description','date_created', 'user_id'],
+          include:[{model: User, attributes:['username']}]
         }
       ]
     });
 
     const blogs = blogData.get({ plain: true });
-    console.log('This is for getting one comment')
+    console.log('This is for getting one blogs comments')
     console.log(blogs)
 
     res.render('comment', {
@@ -95,7 +89,7 @@ router.get('/homepage', withAuth, async (req, res) => {
     // });
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Blog }],
     });
     const user = userData.get({ plain: true });
 

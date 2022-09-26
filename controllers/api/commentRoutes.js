@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Comment = require('../../models');
+const { Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -28,15 +28,13 @@ router.get('/', async (req, res) => {
 });
 
 // route to create/add a comment
-router.post('/comment', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create({
-      description: req.body.description,
-      date_created: req.body.date_created,
-      user_id: req.body.user_id,
-      blog_id: req.body.blog_id,
+      ...req.body,
+      user_id: req.session.user_id,
     });
-
+    console.log('This is for comments commentData' + commentData)
     console.log(commentData)
     res.status(200).json(commentData);
   } catch (err) {

@@ -12,24 +12,18 @@
   </div>
   <div>
     <form class="comment-form">
+      <label>Leave Comment Here:</label>
       <input name="comment-body"></input>
-      <button type="submit">Add comment</button>
+      <button type="submit">Add</button>
     </form>
   </div>
+  <br>
   <div>
-    {{#each comments}}
-      <div class="card">
-        <h3 class="card-header"></h3>
-        <section class="comment card-body">
-            <div class="text">
-                {{blogs.comments.description}}
-            </div>
-            <div class="meta">
-                {{blogs.user.username}}, {{blogs.comments.date_created}}
-            </div>
-        </section>
-      </div>
-      {{/each}}
+    <h3 class="card-header">Comment Section:</h3>
+    {{#each blogs as |comments|}}
+      {{> comments}}
+    {{/each}}
+   
   </div>
 </div>
-<script src="./js/comment.js"></script>
+<script src="/js/comment.js"></script>

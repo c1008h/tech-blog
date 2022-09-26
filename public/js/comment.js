@@ -3,15 +3,15 @@ const commentFormHandler = async (event) => {
 
     const description = document.querySelector('input[name="comment-body"]').value.trim();
 
-    const post_id = window.location.toString().split('/')[
+    const blog_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
 
     if (description) {
-        const response = await fetch('/api/comments', {
+        const response = await fetch('/api/comment', {
             method: 'POST',
             body: JSON.stringify({
-                post_id,
+                blog_id,
                 description
             }),
             headers: {
@@ -23,7 +23,7 @@ const commentFormHandler = async (event) => {
             document.location.reload();
         } else {
             alert(response.statusText);
-            document.querySelector('#comment-form').style.display = "block";
+            // document.querySelector('#comment-form').style.display = "block";
         }
     }
     console.log(description)
@@ -47,6 +47,6 @@ document
     .querySelector('.comment-form')
     .addEventListener('submit', commentFormHandler);
 
-document
-    .querySelector('.delete-comment')
-    .addEventListener('submit', deleteButtonHandler)
+// document
+//     .querySelector('.delete-comment')
+//     .addEventListener('submit', deleteButtonHandler)
