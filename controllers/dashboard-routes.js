@@ -42,8 +42,6 @@ router.get("/", withAuth, (req, res) => {
           console.log('blog for editpage:' + blog)
 
           res.render("edit", {
-            // layout: "dashboard",
-            // blog
             blog
           });
         } else {
