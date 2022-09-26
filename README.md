@@ -2,6 +2,7 @@
 
 <img width="1589" alt="Screen Shot 2022-09-26 at 3 39 55 AM" src="https://user-images.githubusercontent.com/102135325/192256952-acf4624e-ba41-432f-aefe-e66536b62d28.png">
 
+<img width="1487" alt="Screen Shot 2022-09-26 at 3 40 02 AM" src="https://user-images.githubusercontent.com/102135325/192257041-48aae172-bcde-40d3-8b2a-866f21f96375.png">
 
 ## Description
 This application is a Tech Blog that allow users to create blog, edit blog, and view other peoples' blogs.
