@@ -1,4 +1,8 @@
 # Tech Blog
+<img width="1596" alt="Screen Shot 2022-09-26 at 3 40 10 AM" src="https://user-images.githubusercontent.com/102135325/192256934-72718fd4-1816-42c9-aced-0d8a9d783f1a.png">
+<img width="1589" alt="Screen Shot 2022-09-26 at 3 39 55 AM" src="https://user-images.githubusercontent.com/102135325/192256952-acf4624e-ba41-432f-aefe-e66536b62d28.png">
+
+
 ## Description
 This application is a Tech Blog that allow users to create blog, edit blog, and view other peoples' blogs.
 
@@ -25,6 +29,11 @@ This application is a Tech Blog that allow users to create blog, edit blog, and 
   - [Contact](#contact)
 
 ## Instructions
+<img width="1487" alt="Screen Shot 2022-09-26 at 3 40 02 AM" src="https://user-images.githubusercontent.com/102135325/192257041-48aae172-bcde-40d3-8b2a-866f21f96375.png">
+
+Open `http://localhost:3001/` in the browser to run the tech blog. There is seeded files so there will be three users. 
+
+To login use one of the usernames available (Chris, Bob, Susan) with the password of `password`. 
 
 Deployed link: <a href='https://chris-tech-blog-97.herokuapp.com/'>`https://chris-tech-blog-97.herokuapp.com/`</a>
 
@@ -40,9 +49,7 @@ Open MySql shell in the terminal by running `mysql -u root -p`. Enter password w
 Once logged into shell, run `SOURCE db/schema.sql;` then `exit`. To use the database. Run `npm run seed` to run the seeds then `npm start` to run the app locally on `http://localhost:3001/`. 
 
 ### Usage
-Open `http://localhost:3001/` in the browser to run the tech blog. There is seeded files so there will be three users. 
 
-To login use one of the usernames available (Chris, Bob, Susan) with the password of `password`. 
 
 Once logged in, users can view all post in the homepage, or personal post in the dashboard. 
 
