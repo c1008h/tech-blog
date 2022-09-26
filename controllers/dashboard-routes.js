@@ -38,9 +38,12 @@ router.get("/", withAuth, (req, res) => {
       .then(blogData => {
         if (blogData) {
           const blog = blogData.get({ plain: true });
-          
+          console.log('blogdata for editpage:' + blogData)
+          console.log('blog for editpage:' + blog)
+
           res.render("edit", {
-            layout: "dashboard",
+            // layout: "dashboard",
+            // blog
             blog
           });
         } else {

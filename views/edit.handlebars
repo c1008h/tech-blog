@@ -1,0 +1,14 @@
+<div class="card">
+    <h3 class="card-header">Edit Post</h3>
+    <form class="card-body edit-post-form">
+        <label for="blog-title" class="form-label">Title</label>
+        <textarea name="blog-title" type="text" id="blog-title" value="{{blog.title}}" class="form-input">{{blog.title}}</textarea>
+
+        <label class="form-label" for="content">Content</label>
+        <textarea name="content" id='description' type="text" value="{{blog.description}}" class="form-input">{{blog.description}}</textarea>
+        <button type="submit" class="btn">Save</button>
+        <button type="button" class="delete-post-btn btn">Delete</button>
+    </form>
+</div>
+<script type="text/javascript" src="/js/edit.js"></script>
+<script type="text/javascript" src="/js/delete.js"></script>
